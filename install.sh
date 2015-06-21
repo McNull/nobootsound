@@ -32,26 +32,26 @@ if [ "$uninstallmode" = true ]; then
 	defaults delete com.apple.loginwindow LogoutHook
 	
 	echo "Removing files..."
-	rm ~/.nobootsound_loginhook
-	rm ~/.nobootsound_logouthook
-	rm ~/.nobootsound_logoutvol
+	rm ~/bin/nobootsound/.nobootsound_loginhook
+	rm ~/bin/nobootsound/.nobootsound_logouthook
+	rm ~/bin/nobootsound/.nobootsound_logoutvol
 	
 else
 	echo "Copying files..."
 	# Create file .nobootsound_logoutvol where the mute state is stored
-	sudo -u $ACTUAL_USER touch ~/.nobootsound_logoutvol
-	sudo -u $ACTUAL_USER echo "false" > ~/.nobootsound_logoutvol
+	sudo -u $ACTUAL_USER touch ~/bin/nobootsound/.nobootsound_logoutvol
+	sudo -u $ACTUAL_USER echo "false" > ~/bin/nobootsound/.nobootsound_logoutvol
 	
 	# Copy login and logout scripts and make them executable
-	sudo -u $ACTUAL_USER cp nobootsound_loginhook ~/.nobootsound_loginhook
-	sudo -u $ACTUAL_USER cp nobootsound_logouthook ~/.nobootsound_logouthook
-	sudo -u $ACTUAL_USER chmod +x ~/.nobootsound_loginhook
-	sudo -u $ACTUAL_USER chmod +x ~/.nobootsound_logouthook
+	sudo -u $ACTUAL_USER cp nobootsound_loginhook ~/bin/nobootsound/.nobootsound_loginhook
+	sudo -u $ACTUAL_USER cp nobootsound_logouthook ~/bin/nobootsound/.nobootsound_logouthook
+	sudo -u $ACTUAL_USER chmod +x ~/bin/nobootsound/.nobootsound_loginhook
+	sudo -u $ACTUAL_USER chmod +x ~/bin/nobootsound/.nobootsound_logouthook
 
 	echo "Registering hooks..."
 	# Register the scripts as login and logout hooks
-	defaults write com.apple.loginwindow LoginHook  ~/.nobootsound_loginhook
-	defaults write com.apple.loginwindow LogoutHook ~/.nobootsound_logouthook
+	defaults write com.apple.loginwindow LoginHook  ~/bin/nobootsound/.nobootsound_loginhook
+	defaults write com.apple.loginwindow LogoutHook ~/bin/nobootsound/.nobootsound_logouthook
 
 	echo "Done!"
 fi
